@@ -4,6 +4,57 @@
 </div>
 </template>
 
+<script>
+// @ is an alias to /src
+import newtopia from '@/data/newtopia'
+import {
+  TweenMax,
+  Power2,
+  TimelineLite
+} from "gsap/TweenMax";
+import $ from 'jquery';
+//import db from '@/firebase/init'
+
+export default {
+  created() {
+
+    this.newtopia = newtopia
+
+    $(document)
+      .on("mousemove", ".dynamic", function(event) {
+
+        var halfW = (this.clientWidth / 2);
+
+        var halfH = (this.clientHeight / 2);
+
+        var coorX = (halfW - (event.pageX - $(this).offset().left));
+
+        var coorY = (halfH - (event.pageY - $(this).offset().top));
+
+        var degX = ((coorY / halfH) * 10) + 'deg'; // max. degree = 10
+
+        var degY = ((coorX / halfW) * -10) + 'deg'; // max. degree = 10
+
+        $(this).css('transform', function() {
+
+            return 'perspective( 2000px ) translate3d( 0, -2px, 0 ) scale(1.1) rotateX(' + degX + ') rotateY(' + degY + ')';
+          })
+          .children('.dynamic__attribute')
+          .css('transform', function() {
+            return 'perspective( 2000px ) translate3d( 0, 0, 0 ) rotateX(' + degX + ') rotateY(' + degY + ')';
+          });
+      })
+      .on("mouseout", ".dynamic", function() {
+
+        $(this).removeAttr('style')
+          .children('.dynamic__attribute')
+          .removeAttr('style');
+      });
+
+  }
+}
+</script>
+
 <style lang="scss">
 $black: #0B1202;
 
@@ -72,8 +123,13 @@ body {
     background: $black;
     font-size: 62%;
 }
+.dynamic{
+  transition: transform 0.5s cubic-bezier(.215, .61, .355, 1), box-shadow 0.5s cubic-bezier(.215, .61, .355, 1);
+  transform: perspective(600px) translate3d(0, 0, 0);
+  opacity: 1;
+}
 .position-center{
-  position: fixed;
+  position: absolute;
   left: 50%;
   top: 50%;
   @include transform(translate(-50%,-50%));
