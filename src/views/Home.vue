@@ -1,7 +1,7 @@
 <template>
 <div class="countries position-center">
   <ul class="countries">
-    <li v-for="topia in newtopia" :key="topia.key" :class="'country dynamic '+topia.country" @click="chooseCountry(topia)">
+    <li v-for="topia in newtopia" :key="topia.key" :class="'country dynamic '+topia.country" @click="animateCountries(topia)">
       <div class="background" style=""></div>
       <div class="overlay"></div>
       <h2 class="dynamic__attribute">{{topia.country}}</h2>
@@ -30,9 +30,12 @@ export default {
     }
   },
   methods: {
-    chooseCountry(topia) {
-      if (topia) {
-        this.topia = topia;
+    animateCountries(topia){
+      this.topia = topia;
+      TweenMax.fromTo(".countries",1,{opacity:1},{opacity:0,ease:Power2.easeOut,pointerEvents: 'none',onComplete:this.chooseCountry}, 0.2)
+    },
+    chooseCountry() {
+      if (this.topia) {
         this.$router.push({
           name: 'country',
           params: {

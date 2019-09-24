@@ -8,7 +8,6 @@ const newtopia = [
         answer: 'Dolma',
         questions: [{
           question: 'Wat wil je later studeren?',
-          story: 'This is a story',
           answers: [{
               answer: 'Antropologie',
               questions: [{
@@ -18,7 +17,6 @@ const newtopia = [
                     answer: 'Libanon',
                     questions: [{
                       question: 'Waar ga je wonen?',
-                      story: 'null',
                       answers: [{
                           answer: 'In een huis dat je familie huurt in Beiroet.',
                           questions: [{
@@ -70,7 +68,6 @@ const newtopia = [
                     answer: 'Libanon',
                     questions: [{
                       question: 'Waar ga je wonen?',
-                      story: 'null',
                       answers: [{
                           answer: 'In een huis dat je familie huurt in Beiroet.',
                           questions: [{
@@ -124,7 +121,6 @@ const newtopia = [
                       questions : [
                         {
                           question:'Waar ga je wonen?',
-                          story:'null',
                           answers: [
                             {
                               answer: 'In een huis dat je familie huurt in Beiroet.',
@@ -179,7 +175,6 @@ const newtopia = [
         answer: 'Pizza',
         questions: [{
           question: 'Wat wil je later studeren?',
-          story: 'This is a story',
           answers: [{
               answer: 'Antropologie',
               questions: [{
@@ -189,7 +184,6 @@ const newtopia = [
                     answer: 'Libanon',
                     questions: [{
                       question: 'Waar ga je wonen?',
-                      story: 'null',
                       answers: [{
                           answer: 'In een huis dat je familie huurt in Beiroet.',
                           questions: [{
@@ -241,7 +235,7 @@ const newtopia = [
                     answer: 'Libanon',
                     questions: [{
                       question: 'Waar ga je wonen?',
-                      story: 'null',
+
                       answers: [{
                           answer: 'In een huis dat je familie huurt in Beiroet.',
                           questions: [{
@@ -368,7 +362,7 @@ questions: [{
                   answer: 'Libanon',
                   questions: [{
                     question: 'Waar ga je wonen?',
-                    story: 'null',
+
                     answers: [{
                         answer: 'In een huis dat je familie huurt in Beiroet.',
                         questions: [{
@@ -420,7 +414,7 @@ questions: [{
                   answer: 'Libanon',
                   questions: [{
                     question: 'Waar ga je wonen?',
-                    story: 'null',
+
                     answers: [{
                         answer: 'In een huis dat je familie huurt in Beiroet.',
                         questions: [{
@@ -539,7 +533,7 @@ questions: [{
                   answer: 'Libanon',
                   questions: [{
                     question: 'Waar ga je wonen?',
-                    story: 'null',
+
                     answers: [{
                         answer: 'In een huis dat je familie huurt in Beiroet.',
                         questions: [{
@@ -591,7 +585,7 @@ questions: [{
                   answer: 'Libanon',
                   questions: [{
                     question: 'Waar ga je wonen?',
-                    story: 'null',
+
                     answers: [{
                         answer: 'In een huis dat je familie huurt in Beiroet.',
                         questions: [{

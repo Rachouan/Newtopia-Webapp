@@ -1,8 +1,8 @@
 <template>
-<div :class="'country-header '+topia.country ">
-  <div>
+<div :class="'country-header '+topia.country " v-bind:style="{ maskImage: 'url(/assets/Brush-Fullscreen.gif?a='+Math.random()+')'}">
+  <div >
     <h2 class="title">{{topia.country}}</h2>
-    <button @click="startQuestions">Start</button>
+    <button @click="animateCountry" class="dynamic btn">Start</button>
   </div>
 
 </div>
@@ -31,6 +31,7 @@ export default {
     }
   },
   updated() {
+
   },
   created() {
     //do something after creating vue instance
@@ -38,8 +39,13 @@ export default {
   },
   mounted() {
     //do something after mounting vue instance
+    TweenMax.to(".country-header",.6,{opacity:1,className: '+=animate'}, 0.2)
+    TweenMax.fromTo(".country-header div",1,{opacity:0,y:100},{opacity:1,y:0,delay:1,ease:Power2.easeOut}, 0.2)
   },
   methods: {
+    animateCountry(){
+      TweenMax.fromTo(".country-header",.6,{opacity:1,className: '-=animate'},{opacity:0,className: '+=animate-out',onComplete:this.startQuestions}, 0.2)
+    },
     startQuestions(){
       let slug = slugify(this.topia.questions[0].question, {
           replacement: '-',
@@ -80,20 +86,26 @@ export default {
     top: 50%;
     left: 50%;
     @include transform(translate(-50%,-50%));
-    width: 90%;
-    height: 90%;
+    width: 100%;
+    height: 100%;
     display: table;
+    opacity: 0;
+    mask-size: cover;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    background-position: center;
+    background-size: cover;
+    &.animate-out{
+      mask-image: url("/assets/Brush-Fullscreen.gif");
+    }
     &.Syrië{
       background-image: url('/assets/coutries/syrie.jpg');
-      background-position: center;
-      background-size: cover;
-      /*mask-image: url("/assets/mask-image.png");
-      mask-size: auto 100%;
-      mask-repeat: no-repeat;
-      mask-position: right 0 !important;
-      animation: MOVE-MASK 1s steps(14) 1;
-      mask-mode: luminance;*/
-
+      .brush{
+        background-color: #FFB192;
+      }
+    }
+    &.Marokko{
+      background-image: url('/assets/coutries/marokko.jpg');
       .brush{
         background-color: #FFB192;
       }
@@ -103,24 +115,20 @@ export default {
     }
     .title {
         margin-bottom: 0px;
-        font-size: calc(.01333*100% + 80px);
+        font-size: calc(.01333*100% + 100px);
         opacity: 1;
         text-align: center;
     }
-    button{
-      padding: 25px 40px 25px 60px;
-      cursor: pointer;
-      background-color: #FFB192;
-      mask-image: url("/assets/brush-btn.png");
-      mask-size: 100% 100%;
-      mask-repeat: no-repeat;
-      mask-position: right 0 !important;
-      font-family: 'Maison Neue';
-      font-weight: bold;
-      font-size: 13px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
+
+  }
+
+  @-webkit-keyframes MOVE-FULLSCREEN {
+      from {
+          mask-position: -100% 0;
+      }
+      to {
+          mask-position: 120% 0;
+      }
   }
 
 </style>

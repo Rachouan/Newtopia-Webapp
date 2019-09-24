@@ -134,6 +134,20 @@ body {
   top: 50%;
   @include transform(translate(-50%,-50%));
 }
+.btn{
+  padding: 25px 30px 25px 50px;
+  cursor: pointer;
+  background-color: #0B1202;
+  color: #ffffff;
+  mask-image: url("/assets/brush-btn.png");
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+  mask-position: right 0 !important;
+  font-family: 'Maison Neue';
+  font-weight: bold;
+  font-size: 13px;
+  letter-spacing: 0px;
+}
 #app {
     font-family: 'Noe Display', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;

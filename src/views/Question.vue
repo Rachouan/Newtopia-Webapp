@@ -1,14 +1,19 @@
 <template>
 <div :class="'question '+ country ">
-  <h2 id="question" class="title">{{question.question}}</h2>
-  <div class="" v-if="question">
-    <Answer :question="question" v-on:answer-clicked="selectAnswer" />
+  <div v-if="!story">
+    <h2 id="question" class="title">{{question.question}}</h2>
+    <div class="" v-if="question">
+      <Answer :question="question" v-on:answer-clicked="selectAnswer" />
+    </div>
   </div>
+
+  <Story v-if="story" v-on:continue-clicked="nextQuestion" :story="story" :country="country"/>
 </div>
 </template>
 
 <script>
 import Answer from '@/components/Answer'
+import Story from '@/components/Story'
 import {TweenMax, Power2, TimelineLite} from "gsap/TweenMax"
 import SplitText from "@/gsap-bonus/SplitText"
 import slugify from 'slugify'
@@ -18,12 +23,14 @@ export default {
   name: 'Question',
   props: ['topia','country'],
   components: {
-    Answer
+    Answer,
+    Story
   },
   data() {
     return {
       currentTopia: [],
       current: 0,
+      story: null,
       tl: new TimelineMax(),
       prevQuestion: this.topia.questions[0],
       question: this.topia.questions[0]
@@ -32,10 +39,6 @@ export default {
   updated() {
     //do something after updating vue instance
     this.askQuestion();
-  },
-  created() {
-    //do something after creating vue instance
-
   },
   mounted() {
     //do something after mounting vue instance
@@ -80,6 +83,12 @@ export default {
         this.$router.push({
           name: 'complete'
         })
+      } else if (this.currentTopia[0].story) {
+
+        this.story = this.currentTopia[0].story
+        this.prevQuestion = this.question
+        this.question = this.currentTopia[0]
+
       } else if (this.currentTopia[0].back) {
         console.log("BACK");
         this.question = this.question
@@ -91,6 +100,7 @@ export default {
       }
     },
     nextQuestion(){
+      this.story = null
       let slug = slugify(this.question.question, {
           replacement: '-',
           remove: /[$*_+˜.()'"!\-:@]/g,
