@@ -35,7 +35,7 @@ export default {
     animateText() {
       let splitText = new SplitText("#story-title")
       console.log(splitText);
-      TweenMax.staggerFromTo(splitText.words ,0.6,{opacity:0,y:100},{opacity:1,y:0,delay:2 ,ease:Power2.easeOut}, 0.3, this.continueExperience)
+      TweenMax.staggerFromTo(splitText.words ,0.6,{opacity:0,y:100},{opacity:1,y:0,delay:2 ,ease:Power2.easeOut}, 0.2, this.continueExperience)
     },
     continueExperience(){
 

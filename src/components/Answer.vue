@@ -4,7 +4,7 @@
       <ul>
         <li class="dynamic option" v-for="answer in question.answers" :key="answer.id" @click="$emit('answer-clicked',answer.questions)">
           <div class="brush"></div>
-          <span class="dynamic__attribute">{{answer.answer}}</span>
+          <h3 class="dynamic__attribute">{{answer.answer}}</h3>
         </li>
       </ul>
     </div>

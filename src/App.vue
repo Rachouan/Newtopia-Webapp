@@ -1,12 +1,16 @@
 <template>
 <div id="app">
+  <Navbar/>
   <router-view />
+  <Footer/>
 </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import newtopia from '@/data/newtopia'
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 import {
   TweenMax,
   Power2,
@@ -16,6 +20,10 @@ import $ from 'jquery';
 //import db from '@/firebase/init'
 
 export default {
+  components: {
+    Navbar,
+    Footer
+  },
   created() {
 
     this.newtopia = newtopia
@@ -123,6 +131,13 @@ body {
     background: $black;
     font-size: 62%;
 }
+h1,h2,h3,h4,h5{
+  font-family: 'Noe Display';
+}
+.container{
+  margin: 0 auto;
+  width: 1100px;
+}
 .dynamic{
   transition: transform 0.5s cubic-bezier(.215, .61, .355, 1), box-shadow 0.5s cubic-bezier(.215, .61, .355, 1);
   transform: perspective(600px) translate3d(0, 0, 0);
@@ -134,37 +149,34 @@ body {
   top: 50%;
   @include transform(translate(-50%,-50%));
 }
-.btn{
-  padding: 25px 30px 25px 50px;
-  cursor: pointer;
-  background-color: #0B1202;
+.link{
   color: #ffffff;
-  mask-image: url("/assets/brush-btn.png");
-  mask-size: 100% 100%;
+  opacity: .5;
+  text-decoration: none;
+  margin: 0 10px;
+  &:hover{
+    opacity: 1;
+    @include ease-bezier(.6,cubic-bezier(.215, .61, .355, 1));
+  }
+}
+.btn{
+  padding: 35px 50px;
+  cursor: pointer;
+  background-color: $black;
+  color: #ffffff;
+  mask-image: url("/assets/mask-image.png");
+  mask-size: 1600% 100%;
   mask-repeat: no-repeat;
   mask-position: right 0 !important;
   font-family: 'Maison Neue';
   font-weight: bold;
-  font-size: 13px;
-  letter-spacing: 0px;
+  font-size: 16px;
 }
 #app {
-    font-family: 'Noe Display', Helvetica, Arial, sans-serif;
+    font-family: 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #FFFFFF;
-}
-#nav {
-    padding: 30px;
-}
-
-#nav a {
-    font-weight: bold;
-    color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-    color: #42b983;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
 <div :class="'question '+ country ">
-  <div v-if="!story">
+  <div v-if="!story && !video">
     <h2 id="question" class="title">{{question.question}}</h2>
     <div class="" v-if="question">
       <Answer :question="question" v-on:answer-clicked="selectAnswer" />
@@ -8,12 +8,14 @@
   </div>
 
   <Story v-if="story" v-on:continue-clicked="nextQuestion" :story="story" :country="country"/>
+  <Video v-if="video" v-on:continue-clicked="completeExperience" :video="video" :country="country"/>
 </div>
 </template>
 
 <script>
 import Answer from '@/components/Answer'
 import Story from '@/components/Story'
+import Video from '@/components/Video'
 import {TweenMax, Power2, TimelineLite} from "gsap/TweenMax"
 import SplitText from "@/gsap-bonus/SplitText"
 import slugify from 'slugify'
@@ -24,13 +26,16 @@ export default {
   props: ['topia','country'],
   components: {
     Answer,
-    Story
+    Story,
+    Video
   },
   data() {
     return {
       currentTopia: [],
       current: 0,
       story: null,
+      video:null,
+      final:false,
       tl: new TimelineMax(),
       prevQuestion: this.topia.questions[0],
       question: this.topia.questions[0]
@@ -79,10 +84,11 @@ export default {
 
     },
     updateAnswer(){
+
       if (this.currentTopia[0].final) {
-        this.$router.push({
-          name: 'complete'
-        })
+        console.log('final');
+        this.video = this.currentTopia[0].video
+        this.final = true
       } else if (this.currentTopia[0].story) {
 
         this.story = this.currentTopia[0].story
@@ -99,8 +105,18 @@ export default {
         this.nextQuestion()
       }
     },
+    completeExperience(){
+      this.$router.push({
+        name: 'complete'
+      })
+    },
     nextQuestion(){
       this.story = null
+
+      if(this.final){
+        this.completeExperience()
+      }
+
       let slug = slugify(this.question.question, {
           replacement: '-',
           remove: /[$*_+˜.()'"!\-:@]/g,
@@ -112,7 +128,6 @@ export default {
           lower: true
         })
 
-        console.log(this.currentTopia);
       if (this.topia) {
         this.$router.push({
           name: 'question',
